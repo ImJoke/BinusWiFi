@@ -4,7 +4,7 @@
     {
       "src": "api/binusWifiAPI_prod.py",
       "use": "@vercel/python"
-    },
+    }
   ],
   "routes": [
     {
