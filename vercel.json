@@ -10,20 +10,7 @@
       "use": "@vercel/php"
     }
   ],
-  "functions": {
-    "api/binusWifiAPI_prod.py": {
-      "runtime": "@vercel/python"
-    },
-    "index.php": {
-      "runtime": "@vercel/php",
-      "includeFiles": "assets/*"
-    }
-  },
   "routes": [
-    {
-      "src": "/assets/(.*)",
-      "dest": "/assets/$1"
-    },
     {
       "src": "/api/(.*)",
       "dest": "/api/binusWifiAPI_prod.py"
