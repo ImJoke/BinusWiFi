@@ -18,6 +18,10 @@
         {
             "src": "/",
             "dest": "index.php"
+        },
+        {
+            "src": "/assets/(.*)",
+            "dest": "assets/"
         }
     ]
 }
