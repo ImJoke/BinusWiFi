@@ -1,4 +1,7 @@
 <?php
+phpinfo();
+/*
+<?php
 function getClientIP() {
     $ipaddress = '';
     if (isset($_SERVER['HTTP_CLIENT_IP']))
@@ -119,3 +122,4 @@ logIPToDatabase(getClientIP());
     </div>
 </body>
 </html>
+*/
