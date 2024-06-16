@@ -7,17 +7,17 @@
         },
         {
             "src": "index.php",
-            "use": "vercel-php@0.7.1"
+            "use": "@vercel/php@0.7.1"
         }
     ],
     "routes": [
         {
             "src": "/assets/(.*)",
-            "dest": "assets/"
+            "dest": "/assets/$1"
         },
         {
             "src": "/",
-            "dest": "index.php"
+            "dest": "/index.php"
         }
     ]
 }
