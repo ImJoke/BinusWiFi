@@ -1,3 +1,0 @@
-Quart
-asyncpg
-hypercorn
