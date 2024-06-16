@@ -12,12 +12,12 @@
   ],
   "routes": [
     {
-      "src": "/(.*)",
-      "dest": "/index.php"
-    },
-    {
       "src": "/assets/(.*)",
       "dest": "/assets/$1"
+    },
+    {
+      "src": "/(.*)",
+      "dest": "/index.php"
     }
   ]
 }
