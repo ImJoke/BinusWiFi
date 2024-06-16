@@ -1,7 +1,7 @@
 {
 	"version": 2,
 	"builds": [
-		{"src": "binusWifiAPI_prod.py", "use": "@vercel/python@3.9"}
+		{"src": "binusWifiAPI_prod.py", "use": "@vercel/python"}
 	],
 	"routes": [
 		{"src": "/(.*)", "dest": "binusWifiAPI_prod.py"}
