@@ -2,10 +2,12 @@
   "version": 2,
   "builds": [
     {"src": "binusWifiAPI_prod.py", "use": "@vercel/python"},
-    {"src": "index.php", "use": "@vercel/php"}
   ],
   "routes": [
     {"src": "/api/(.*)", "dest": "binusWifiAPI_prod.py"},
     {"src": "/(.*)", "dest": "/index.php"}
-  ]
+  ],
+  "functions": {
+    "api/**/*.php": { runtime: "vercel-php" },
+  }
 }
