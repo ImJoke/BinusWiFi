@@ -7,7 +7,7 @@ app = Quart(__name__)
 
 class WifiAttend:
     def __init__(self):
-        self.db_url = os.getenv('POSTGRES_URL')
+        self.db_url = os.getenv('POSTGRES_URL', 'postgres://default:q2kuJlzySt1O@ep-wandering-field-a1z55naq-pooler.ap-southeast-1.aws.neon.tech:5432/verceldb?sslmode=require')
         self.lock = asyncio.Lock()
 
     async def init_db(self):
