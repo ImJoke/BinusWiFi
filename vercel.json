@@ -10,15 +10,5 @@
     {
       "src": "/api/(.*)",
       "dest": "binusWifiAPI_prod.py"
-    },
-    {
-      "src": "/(.*)",
-      "dest": "/index.php"
     }
-  ],
-  "functions": {
-    "*.php": {
-      "runtime": "vercel-php@0.5.3"
-    }
-  }
 }
