@@ -1,5 +1,5 @@
 {
-  "version": 2,
+  "version": 3,
   "builds": [
     {
       "src": "api/binusWifiAPI_prod.py",
@@ -9,7 +9,7 @@
   "routes": [
     {
       "src": "/(.*)",
-      "dest": "binusWifiAPI_prod.py"
+      "dest": "api/binusWifiAPI_prod.py"
     }
   ]
 }
