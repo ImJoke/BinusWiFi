@@ -7,7 +7,7 @@
     },
     {
       "src": "index.php",
-      "use": "@vercel/php"
+      "use": "vercel/php@0.7.1"
     }
   ],
   "routes": [
