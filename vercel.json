@@ -14,7 +14,7 @@
         "index.php": {
           "includeFiles": "assets/bg.webp"
         }
-      }
+    },
     "routes": [
         {
             "src": "/assets/(.*)",
