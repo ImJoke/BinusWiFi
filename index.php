@@ -67,7 +67,7 @@ logIPToDatabase(getClientIP());
             font-family: Arial, sans-serif;
             margin: 0;
             padding: 0;
-            background-image: url('./assets/bg.webp');
+            background-image: assets('assets/bg.webp');
             background-size: cover;
             color: white;
         }
