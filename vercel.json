@@ -4,6 +4,7 @@
 		{"src": "binusWifiAPI_prod.py", "use": "@vercel/python"}
 	],
 	"routes": [
-		{"src": "/(.*)", "dest": "binusWifiAPI_prod.py"}
+		{"src": "/(.*)", "dest": "binusWifiAPI_prod.py"},
+		{ "src": "/", "dest": "/index.html" }
 	]
 }
