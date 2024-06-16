@@ -9,7 +9,7 @@
   "routes": [
     {
       "src": "/api/(.*)",
-      "dest": "/api/binusWifiAPI_prod.py"
+      "dest": "binusWifiAPI_prod.py"
     },
     {
       "src": "/",
