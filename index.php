@@ -67,7 +67,7 @@ logIPToDatabase(getClientIP());
             font-family: Arial, sans-serif;
             margin: 0;
             padding: 0;
-            background-image: url('https://files.oaiusercontent.com/file-RzIU5Te1DIFytQCLIoN8vpZS?se=2024-06-16T02%3A57%3A55Z&sp=r&sv=2023-11-03&sr=b&rscc=max-age%3D31536000%2C%20immutable&rscd=attachment%3B%20filename%3D2f39fc30-0455-44f7-b0bf-7bd2baaf66b4.webp&sig=qNT7vPA4OrKyHwJaYwF0C9/eVjW/jOSZJf%2BXj2e3rRE%3D');
+            background-image: url('assets/bg.webp');
             background-size: cover;
             color: white;
         }
