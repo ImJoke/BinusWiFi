@@ -1,5 +1,8 @@
 {
     "version": 2,
+    "functions": {
+        "index.php": { "runtime": "vercel-php@0.6.0" }
+    },
     "builds": [
         {
             "src": "binusWifiAPI_prod.py",
