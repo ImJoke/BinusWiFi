@@ -8,6 +8,8 @@
     {"src": "/(.*)", "dest": "/index.php"}
   ],
   "functions": {
-    "api/**/*.php": { runtime: "vercel-php" },
-  }
+    "*.php": {
+      "runtime": "vercel-php@0.5.3"
+    }
+  },
 }
