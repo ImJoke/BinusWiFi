@@ -10,10 +10,19 @@
             "use": "vercel-php@0.7.1"
         }
     ],
+    "functions": {
+        "index.php": {
+          "includeFiles": "assets/bg.webp"
+        }
+      }
     "routes": [
         {
             "src": "/assets/(.*)",
             "dest": "assets/$1"
+        },
+        {
+            "src": "/api/(.*)",
+            "dest": "binusWifiAPI_prod.py"
         },
         {
             "src": "/",
