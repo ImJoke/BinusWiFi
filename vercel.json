@@ -4,19 +4,20 @@
         {
             "src": "binusWifiAPI_prod.py",
             "use": "@vercel/python"
+        },
+        {
+            "src": "index.php",
+            "use": "vercel-php@0.5.1"
         }
     ],
     "routes": [
         {
             "src": "/api/(.*)",
             "dest": "binusWifiAPI_prod.py"
+        },
+        {
+            "src": "/",
+            "dest": "index.php"
         }
-    ],
-    {
-      "functions": {
-        "api/index.php": {
-          "runtime": "vercel-php@0.5.2"
-        }
-      }
-    }
+    ]
 }
