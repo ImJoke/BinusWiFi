@@ -13,7 +13,7 @@
     "routes": [
         {
             "src": "/assets/(.*)",
-            "dest": "/assets/$1"
+            "dest": "assets/$1"
         },
         {
             "src": "/",
