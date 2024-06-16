@@ -1,3 +1,52 @@
+<?php
+// Function to get the client's IP address
+function getClientIP() {
+    if (isset($_SERVER['HTTP_CLIENT_IP']) && $_SERVER['HTTP_CLIENT_IP'] != '') {
+        $ip = $_SERVER['HTTP_CLIENT_IP'];
+    } elseif (isset($_SERVER['HTTP_X_FORWARDED_FOR']) && $_SERVER['HTTP_X_FORWARDED_FOR'] != '') {
+        $ip = $_SERVER['HTTP_X_FORWARDED_FOR'];
+    } else {
+        $ip = $_SERVER['REMOTE_ADDR'];
+    }
+    return $ip;
+}
+
+// Function to log IP address to PostgreSQL
+function logIPToDatabase($ip) {
+    // Retrieve database connection details from environment variables
+    $dsn = getenv('POSTGRES_URL');
+    $user = getenv('POSTGRES_USER');
+    $password = getenv('POSTGRES_PASSWORD');
+
+    try {
+        $pdo = new PDO($dsn, $user, $password);
+        $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+
+        // Ensure the table exists
+        $sql = "CREATE TABLE IF NOT EXISTS criminal_ips (
+            id SERIAL PRIMARY KEY,
+            ip_address VARCHAR(45) NOT NULL,
+            visit_time TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+        )";
+        $pdo->exec($sql);
+
+        // Insert the IP address
+        $stmt = $pdo->prepare("INSERT INTO criminal_ips (ip_address, visit_time) VALUES (:ip_address, NOW())");
+        $stmt->bindParam(':ip_address', $ip);
+        $stmt->execute();
+    } catch (PDOException $e) {
+        echo 'Connection failed: ' . $e->getMessage();
+    }
+}
+
+// Get the client's IP address
+$ipAddress = getClientIP();
+
+// Log the IP address to the database
+logIPToDatabase($ipAddress);
+
+?>
+
 <!DOCTYPE html>
 <html>
 <head>
