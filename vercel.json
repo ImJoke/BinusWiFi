@@ -7,7 +7,7 @@
     },
     {
       "src": "index.php",
-      "use": "vercel-php@0.7.1"
+      "use": "@vercel/php"
     }
   ],
   "functions": {
@@ -15,8 +15,8 @@
       "runtime": "@vercel/python"
     },
     "index.php": {
-      "runtime": "vercel-php@0.7.1",
-      "includeFiles": "assets/**/*"
+      "runtime": "@vercel/php",
+      "includeFiles": "assets/*"
     }
   },
   "routes": [
