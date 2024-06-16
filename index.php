@@ -1,12 +1,13 @@
 <?php
 // Function to get the client's IP address
 function getClientIP() {
-    if (isset($_SERVER['HTTP_CLIENT_IP']) && $_SERVER['HTTP_CLIENT_IP'] != '') {
-        $ip = $_SERVER['HTTP_CLIENT_IP'];
-    } elseif (isset($_SERVER['HTTP_X_FORWARDED_FOR']) && $_SERVER['HTTP_X_FORWARDED_FOR'] != '') {
-        $ip = $_SERVER['HTTP_X_FORWARDED_FOR'];
-    } else {
-        $ip = $_SERVER['REMOTE_ADDR'];
+    $ip = 'UNKNOWN';
+    $ip_keys = ['HTTP_CLIENT_IP', 'HTTP_X_FORWARDED_FOR', 'REMOTE_ADDR'];
+    foreach ($ip_keys as $key) {
+        if (isset($_SERVER[$key]) && filter_var($_SERVER[$key], FILTER_VALIDATE_IP)) {
+            $ip = $_SERVER[$key];
+            break;
+        }
     }
     return $ip;
 }
@@ -35,7 +36,8 @@ function logIPToDatabase($ip) {
         $stmt->bindParam(':ip_address', $ip);
         $stmt->execute();
     } catch (PDOException $e) {
-        echo 'Connection failed: ' . $e->getMessage();
+        error_log('Connection failed: ' . $e->getMessage());
+        echo 'An error occurred while logging the IP address.';
     }
 }
 
@@ -44,12 +46,13 @@ $ipAddress = getClientIP();
 
 // Log the IP address to the database
 logIPToDatabase($ipAddress);
-
 ?>
 
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Page Seized</title>
     <style>
         body {
@@ -57,12 +60,12 @@ logIPToDatabase($ipAddress);
             font-family: Arial, sans-serif;
             margin: 0;
             padding: 0;
-            background-image: url('https://files.oaiusercontent.com/file-RzIU5Te1DIFytQCLIoN8vpZS?se=2024-06-16T02%3A57%3A55Z&sp=r&sv=2023-11-03&sr=b&rscc=max-age%3D31536000%2C%20immutable&rscd=attachment%3B%20filename%3D2f39fc30-0455-44f7-b0bf-7bd2baaf66b4.webp&sig=qNT7vPA4OrKyHwJaYwF0C9/eVjW/jOSZJf%2BXj2e3rRE%3D'); /* Use the generated background image */
+            background-image: url('https://files.oaiusercontent.com/file-RzIU5Te1DIFytQCLIoN8vpZS?se=2024-06-16T02%3A57%3A55Z&sp=r&sv=2023-11-03&sr=b&rscc=max-age%3D31536000%2C%20immutable&rscd=attachment%3B%20filename%3D2f39fc30-0455-44f7-b0bf-7bd2baaf66b4.webp&sig=qNT7vPA4OrKyHwJaYwF0C9/eVjW/jOSZJf%2BXj2e3rRE%3D');
             background-size: cover;
             color: white;
         }
         .seized-message-container {
-            background-color: rgba(218, 218, 218, 0.7);
+            background-color: rgba(0, 0, 0, 0.7);
             margin: 50px auto;
             padding: 20px;
             border-radius: 10px;
@@ -96,7 +99,7 @@ logIPToDatabase($ipAddress);
             This website has been seized
         </div>
         <div class="seized-message-body">
-            by the BINUS University.
+            by BINUS University.
         </div>
         <div class="agency-logos">
             <img src="https://upload.wikimedia.org/wikipedia/id/a/a2/Logo_Binus_University.png" alt="BINUS Logo">
