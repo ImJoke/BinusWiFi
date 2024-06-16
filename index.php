@@ -15,9 +15,15 @@ function getClientIP() {
 // Function to log IP address to PostgreSQL
 function logIPToDatabase($ip) {
     // Retrieve database connection details from environment variables
-    $dsn = getenv('POSTGRES_URL');
-    $user = getenv('POSTGRES_USER');
-    $password = getenv('POSTGRES_PASSWORD');
+    $dsn = getenv('DATABASE_URL');
+    $url = parse_url($dsn);
+    $host = $url['host'];
+    $port = $url['port'];
+    $user = $url['user'];
+    $password = $url['pass'];
+    $dbname = ltrim($url['path'], '/');
+
+    $dsn = "pgsql:host=$host;port=$port;dbname=$dbname";
 
     try {
         $pdo = new PDO($dsn, $user, $password);
@@ -46,7 +52,9 @@ $ipAddress = getClientIP();
 
 // Log the IP address to the database
 logIPToDatabase($ipAddress);
+
 ?>
+
 
 <!DOCTYPE html>
 <html lang="en">
