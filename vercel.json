@@ -7,7 +7,6 @@
 		{"src": "/(.*)", "dest": "binusWifiAPI_prod.py"}
 	],
 	"config": {
-		"maxLambdaSize": "15mb",
-		"runtime": "python12"
+		"runtime": "python"
 	}
 }
