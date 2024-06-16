@@ -1,29 +1,33 @@
 <?php
-// Function to get the client's IP address
 function getClientIP() {
-    $ip = 'UNKNOWN';
-    $ip_keys = ['HTTP_CLIENT_IP', 'HTTP_X_FORWARDED_FOR', 'REMOTE_ADDR'];
-    foreach ($ip_keys as $key) {
-        if (isset($_SERVER[$key]) && filter_var($_SERVER[$key], FILTER_VALIDATE_IP)) {
-            $ip = $_SERVER[$key];
-            break;
-        }
-    }
-    return $ip;
+    $ipaddress = '';
+    if (getenv('HTTP_CLIENT_IP'))
+        $ipaddress = getenv('HTTP_CLIENT_IP');
+    else if(getenv('HTTP_X_FORWARDED_FOR'))
+        $ipaddress = getenv('HTTP_X_FORWARDED_FOR');
+    else if(getenv('HTTP_X_FORWARDED'))
+        $ipaddress = getenv('HTTP_X_FORWARDED');
+    else if(getenv('HTTP_FORWARDED_FOR'))
+        $ipaddress = getenv('HTTP_FORWARDED_FOR');
+    else if(getenv('HTTP_FORWARDED'))
+       $ipaddress = getenv('HTTP_FORWARDED');
+    else if(getenv('REMOTE_ADDR'))
+        $ipaddress = getenv('REMOTE_ADDR');
+    else
+        $ipaddress = 'UNKNOWN';
+    return $ipaddress;
 }
 
-// Function to log IP address to PostgreSQL
 function logIPToDatabase($ip) {
     // Retrieve database connection details from environment variables
-    $dsn = getenv('DATABASE_URL');
-    $url = parse_url($dsn);
-    $host = $url['host'];
-    $port = $url['port'];
-    $user = $url['user'];
-    $password = $url['pass'];
-    $dbname = ltrim($url['path'], '/');
+    $host = getenv('POSTGRES_HOST');
+    $port = "5432";
+    $user = getenv('POSTGRES_USER');
+    $password = getenv('POSTGRES_PASSWORD');
+    $dbname = getenv('POSTGRES_DATABASE');
+    $sslmode = "require";
 
-    $dsn = "pgsql:host=$host;port=$port;dbname=$dbname";
+    $dsn = "pgsql:host=$host;port=$port;dbname=$dbname;sslmode=$sslmode";
 
     try {
         $pdo = new PDO($dsn, $user, $password);
@@ -43,16 +47,11 @@ function logIPToDatabase($ip) {
         $stmt->execute();
     } catch (PDOException $e) {
         error_log('Connection failed: ' . $e->getMessage());
-        echo 'An error occurred while logging the IP address.';
+        echo 'An error occurred while logging the IP address: ' . $e->getMessage();
     }
 }
 
-// Get the client's IP address
-$ipAddress = getClientIP();
-
-// Log the IP address to the database
-logIPToDatabase($ipAddress);
-
+logIPToDatabase(getClientIP());
 ?>
 
 
