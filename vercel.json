@@ -1,32 +1,36 @@
 {
-    "version": 2,
-    "builds": [
-        {
-            "src": "binusWifiAPI_prod.py",
-            "use": "@vercel/python"
-        },
-        {
-            "src": "index.php",
-            "use": "vercel-php@0.7.1"
-        }
-    ],
-    "functions": {
-        "index.php": {
-          "includeFiles": "assets/bg.webp"
-        }
+  "version": 2,
+  "builds": [
+    {
+      "src": "binusWifiAPI_prod.py",
+      "use": "@vercel/python"
     },
-    "routes": [
-        {
-            "src": "/assets/(.*)",
-            "dest": "assets/$1"
-        },
-        {
-            "src": "/api/(.*)",
-            "dest": "binusWifiAPI_prod.py"
-        },
-        {
-            "src": "/",
-            "dest": "/index.php"
-        }
-    ]
+    {
+      "src": "index.php",
+      "use": "vercel-php@0.7.1"
+    }
+  ],
+  "functions": {
+    "api/binusWifiAPI_prod.py": {
+      "runtime": "@vercel/python"
+    },
+    "index.php": {
+      "runtime": "vercel-php@0.7.1",
+      "includeFiles": "assets/**/*"
+    }
+  },
+  "routes": [
+    {
+      "src": "/assets/(.*)",
+      "dest": "/assets/$1"
+    },
+    {
+      "src": "/api/(.*)",
+      "dest": "/api/binusWifiAPI_prod.py"
+    },
+    {
+      "src": "/",
+      "dest": "/index.php"
+    }
+  ]
 }
