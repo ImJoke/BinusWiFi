@@ -1,3 +1,4 @@
 quart
-aiosqlite
+asyncpg
 hypercorn
+asyncio
