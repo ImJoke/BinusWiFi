@@ -12,16 +12,16 @@
     ],
     "routes": [
         {
+            "src": "/assets/(.*)",
+            "dest": "assets/"
+        },
+        {
             "src": "/api/(.*)",
             "dest": "binusWifiAPI_prod.py"
         },
         {
             "src": "/",
             "dest": "index.php"
-        },
-        {
-            "src": "/assets/(.*)",
-            "dest": "assets/"
         }
     ]
 }
