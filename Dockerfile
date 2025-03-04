@@ -1,15 +1,12 @@
-FROM python:3.9-slim
+FROM python:3.9
 
 WORKDIR /app
 
-# Install dependencies
 COPY requirements.txt .
-RUN pip install --no-cache-dir -r requirements.txt
 
-# Copy project files
+RUN pip install --upgrade pip && \
+    pip install --no-cache-dir -r requirements.txt
+
 COPY . .
 
-# For local development we use a simple server
-# (Vercel will use serverless functions in production)
-EXPOSE 3000
-CMD ["python", "api/index.py"]
+CMD ["uvicorn", "main:app", "--host", "0.0.0.0", "--port", "8000"]
